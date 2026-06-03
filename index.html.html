@@ -1,0 +1,456 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Priyanka Rathore — Personal Portfolio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --ink: #1a1a18;
+    --ink-soft: #6b6b64;
+    --ink-faint: #c2c2ba;
+    --paper: #fafaf7;
+    --paper-warm: #f3f2ed;
+    --accent: #2d5a3d;
+    --accent-light: #e8f0eb;
+    --border: #e4e4dc;
+    --radius: 12px;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--paper);
+    color: var(--ink);
+    font-size: 16px;
+    line-height: 1.7;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* ── NAV ── */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    background: rgba(250,250,247,0.85);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+    padding: 0 2rem;
+    display: flex; align-items: center; justify-content: space-between;
+    height: 60px;
+  }
+  .nav-name {
+    font-family: 'DM Serif Display', serif;
+    font-size: 1.1rem;
+    letter-spacing: 0.01em;
+    color: var(--ink);
+    text-decoration: none;
+  }
+  .nav-links { display: flex; gap: 2rem; list-style: none; }
+  .nav-links a {
+    font-size: 0.875rem;
+    font-weight: 400;
+    color: var(--ink-soft);
+    text-decoration: none;
+    letter-spacing: 0.03em;
+    transition: color 0.2s;
+  }
+  .nav-links a:hover { color: var(--accent); }
+
+  /* ── SECTIONS ── */
+  section { padding: 6rem 2rem; max-width: 760px; margin: 0 auto; }
+  section + section { padding-top: 0; }
+
+  /* ── HERO ── */
+  #hero {
+    padding-top: 9rem;
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 3rem;
+    align-items: center;
+  }
+  .hero-tag {
+    display: inline-block;
+    font-size: 0.75rem;
+    font-weight: 500;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--accent);
+    background: var(--accent-light);
+    padding: 4px 12px;
+    border-radius: 100px;
+    margin-bottom: 1.25rem;
+  }
+  .hero-name {
+    font-family: 'DM Serif Display', serif;
+    font-size: clamp(2.4rem, 6vw, 3.5rem);
+    line-height: 1.1;
+    color: var(--ink);
+    margin-bottom: 1.25rem;
+  }
+  .hero-name em { font-style: italic; color: var(--accent); }
+  .hero-bio {
+    font-size: 1.05rem;
+    color: var(--ink-soft);
+    max-width: 480px;
+    margin-bottom: 2rem;
+    font-weight: 300;
+  }
+  .hero-btns { display: flex; gap: 0.75rem; flex-wrap: wrap; }
+  .btn {
+    display: inline-flex; align-items: center; gap: 6px;
+    padding: 0.65rem 1.35rem;
+    border-radius: 100px;
+    font-size: 0.9rem;
+    font-weight: 500;
+    text-decoration: none;
+    transition: all 0.2s;
+    cursor: pointer;
+    border: none;
+  }
+  .btn-primary { background: var(--ink); color: var(--paper); }
+  .btn-primary:hover { background: var(--accent); }
+  .btn-secondary { background: transparent; color: var(--ink); border: 1px solid var(--border); }
+  .btn-secondary:hover { border-color: var(--ink-faint); background: var(--paper-warm); }
+
+  .avatar-wrap { flex-shrink: 0; }
+  .avatar {
+    width: 160px; height: 160px;
+    border-radius: 50%;
+    background: var(--paper-warm);
+    border: 3px solid var(--border);
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'DM Serif Display', serif;
+    font-size: 3.5rem;
+    color: var(--ink-soft);
+    overflow: hidden;
+    position: relative;
+  }
+  .avatar-initials { line-height: 1; }
+
+  /* ── DIVIDER ── */
+  .divider {
+    max-width: 760px; margin: 0 auto 0;
+    height: 1px; background: var(--border);
+  }
+
+  /* ── SECTION LABEL ── */
+  .section-label {
+    font-size: 0.7rem;
+    font-weight: 500;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--ink-faint);
+    margin-bottom: 2rem;
+    display: flex; align-items: center; gap: 0.75rem;
+  }
+  .section-label::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: var(--border);
+  }
+  .section-title {
+    font-family: 'DM Serif Display', serif;
+    font-size: 1.9rem;
+    color: var(--ink);
+    margin-bottom: 1rem;
+  }
+  .section-body { color: var(--ink-soft); font-weight: 300; max-width: 560px; }
+
+  /* ── ABOUT ── */
+  #about { padding-top: 4rem; }
+  .about-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+    margin-top: 2rem;
+  }
+  .about-card {
+    background: var(--paper-warm);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 1.25rem 1.4rem;
+  }
+  .about-card-label {
+    font-size: 0.72rem;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--ink-faint);
+    margin-bottom: 0.4rem;
+  }
+  .about-card-value {
+    font-family: 'DM Serif Display', serif;
+    font-size: 1.05rem;
+    color: var(--ink);
+  }
+
+  /* ── SKILLS ── */
+  #skills { padding-top: 4rem; }
+  .skills-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 1rem;
+    margin-top: 2rem;
+  }
+  .skill-card {
+    background: var(--paper);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 1.25rem 1.4rem;
+    transition: border-color 0.2s, background 0.2s;
+  }
+  .skill-card:hover { border-color: var(--ink-faint); background: var(--paper-warm); }
+  .skill-icon {
+    width: 36px; height: 36px;
+    border-radius: 8px;
+    background: var(--accent-light);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1rem;
+    margin-bottom: 0.75rem;
+  }
+  .skill-name {
+    font-weight: 500;
+    font-size: 0.95rem;
+    color: var(--ink);
+    margin-bottom: 0.3rem;
+  }
+  .skill-desc { font-size: 0.82rem; color: var(--ink-soft); line-height: 1.5; }
+  .skill-bar-wrap { margin-top: 0.75rem; background: var(--border); border-radius: 100px; height: 3px; }
+  .skill-bar { height: 3px; border-radius: 100px; background: var(--accent); transition: width 1s cubic-bezier(.4,0,.2,1); }
+
+  /* ── CONTACT ── */
+  #contact { padding-top: 4rem; padding-bottom: 6rem; }
+  .contact-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.75rem;
+    margin-top: 2rem;
+  }
+  .contact-item {
+    display: flex; align-items: center; gap: 0.85rem;
+    background: var(--paper-warm);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 1rem 1.25rem;
+    text-decoration: none;
+    color: var(--ink);
+    transition: all 0.2s;
+  }
+  .contact-item:hover { border-color: var(--ink-faint); background: var(--paper); }
+  .contact-icon {
+    width: 36px; height: 36px; flex-shrink: 0;
+    border-radius: 8px;
+    background: var(--paper);
+    border: 1px solid var(--border);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.1rem;
+  }
+  .contact-label { font-size: 0.72rem; color: var(--ink-faint); text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 2px; }
+  .contact-value { font-size: 0.9rem; font-weight: 500; color: var(--ink); }
+
+  /* ── FOOTER ── */
+  footer {
+    border-top: 1px solid var(--border);
+    text-align: center;
+    padding: 2rem;
+    font-size: 0.8rem;
+    color: var(--ink-faint);
+  }
+
+  /* ── ANIMATIONS ── */
+  .fade-up {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+  }
+  .fade-up.visible { opacity: 1; transform: none; }
+
+  @media (max-width: 600px) {
+    #hero { grid-template-columns: 1fr; }
+    .avatar-wrap { order: -1; }
+    .avatar { width: 100px; height: 100px; font-size: 2.2rem; }
+    .about-grid, .contact-grid { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a class="nav-name" href="#hero">Priyanka Rathore</a>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div>
+    <span class="hero-tag">Open to Opportunities</span>
+    <h1 class="hero-name">Hi I'm<em> Priyanka Rathore</em></h1>
+    <p class="hero-bio">A curious student passionate about learning, creating, and making a positive impact. Based in Mysuru, India.</p>
+    <div class="hero-btns">
+      <a href="#contact" class="btn btn-primary">Get in touch</a>
+      <a href="#skills" class="btn btn-secondary">View skills</a>
+    </div>
+  </div>
+  <div class="avatar-wrap">
+    <div class="avatar">
+      <span class="avatar-initials">PR</span>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ABOUT -->
+<section id="about" class="fade-up">
+  <div class="section-label">About me</div>
+  <h2 class="section-title">A little about myself</h2>
+  <p class="section-body">
+    I'm a motivated and enthusiastic student who believes in the power of technology and continuous learning.
+    I enjoy exploring new ideas, working on creative projects, and growing through every experience.
+    I'm currently building skills in tech and design, with a goal to contribute meaningfully to the world around me.
+  </p>
+  <div class="about-grid">
+    <div class="about-card">
+      <div class="about-card-label">Location</div>
+      <div class="about-card-value">Mysuru, Karnataka, India</div>
+    </div>
+    <div class="about-card">
+      <div class="about-card-label">Status</div>
+      <div class="about-card-value">Student &amp; Learner</div>
+    </div>
+    <div class="about-card">
+      <div class="about-card-label">Interests</div>
+      <div class="about-card-value">Technology, Design, Growth</div>
+    </div>
+    <div class="about-card">
+      <div class="about-card-label">Language</div>
+      <div class="about-card-value">English, Kannada, Hindi</div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- SKILLS -->
+<section id="skills" class="fade-up">
+  <div class="section-label">Skills</div>
+  <h2 class="section-title">What I bring to the table</h2>
+  <p class="section-body">A growing set of skills across technology, communication, and creative thinking.</p>
+
+  <div class="skills-grid">
+    <div class="skill-card">
+      <div class="skill-icon">💻</div>
+      <div class="skill-name">Digital Literacy</div>
+      <div class="skill-desc">Comfortable navigating tools, platforms, and digital workflows.</div>
+      <div class="skill-bar-wrap"><div class="skill-bar" data-width="85" style="width:0%"></div></div>
+    </div>
+    <div class="skill-card">
+      <div class="skill-icon">🤝</div>
+      <div class="skill-name">Communication</div>
+      <div class="skill-desc">Clear, concise, and empathetic in written and verbal communication.</div>
+      <div class="skill-bar-wrap"><div class="skill-bar" data-width="80" style="width:0%"></div></div>
+    </div>
+    <div class="skill-card">
+      <div class="skill-icon">🧩</div>
+      <div class="skill-name">Problem Solving</div>
+      <div class="skill-desc">Analytical thinker who approaches challenges creatively.</div>
+      <div class="skill-bar-wrap"><div class="skill-bar" data-width="75" style="width:0%"></div></div>
+    </div>
+    <div class="skill-card">
+      <div class="skill-icon">🌐</div>
+      <div class="skill-name">AI Tools</div>
+      <div class="skill-desc">Exploring AI-powered tools for productivity and creativity.</div>
+      <div class="skill-bar-wrap"><div class="skill-bar" data-width="70" style="width:0%"></div></div>
+    </div>
+    <div class="skill-card">
+      <div class="skill-icon">📋</div>
+      <div class="skill-name">Team Collaboration</div>
+      <div class="skill-desc">Works well in team environments with a positive attitude.</div>
+      <div class="skill-bar-wrap"><div class="skill-bar" data-width="88" style="width:0%"></div></div>
+    </div>
+    <div class="skill-card">
+      <div class="skill-icon">📚</div>
+      <div class="skill-name">Self-Learning</div>
+      <div class="skill-desc">Dedicated to continuous growth through online resources and courses.</div>
+      <div class="skill-bar-wrap"><div class="skill-bar" data-width="90" style="width:0%"></div></div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- CONTACT -->
+<section id="contact" class="fade-up">
+  <div class="section-label">Contact</div>
+  <h2 class="section-title">Let's connect</h2>
+  <p class="section-body">Feel free to reach out — I'm always open to conversations, collaborations, and new opportunities.</p>
+
+  <div class="contact-grid">
+    <a href="mailto:priyankarathore.1444@gmail.com" class="contact-item">
+      <div class="contact-icon">✉️</div>
+      <div>
+        <div class="contact-label">Email</div>
+        <div class="contact-value">priyankarathore.1444@gmail.com</div>
+      </div>
+    </a>
+    <a href="https://linkedin.com/in/priyanka-rathore-tech" target="_blank" class="contact-item">
+      <div class="contact-icon">🔗</div>
+      <div>
+        <div class="contact-label">LinkedIn</div>
+        <div class="contact-value">linkedin.com/in/priyanka-rathore-tech</div>
+      </div>
+    </a>
+    <a href="tel:+91 98446 61444" class="contact-item">
+      <div class="contact-icon">📞</div>
+      <div>
+        <div class="contact-label">Phone</div>
+        <div class="contact-value">+91 98446 61444</div>
+      </div>
+    </a>
+    <a href="https://github.com/priyankarathore0208" target="_blank" class="contact-item">
+      <div class="contact-icon">⌨️</div>
+      <div>
+        <div class="contact-label">GitHub</div>
+        <div class="contact-value">github.com/priyankarathore0208</div>
+      </div>
+    </a>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <p>Designed &amp; built with ❤️ · © 2026 Priyanka Rathore</p>
+</footer>
+
+<script>
+  const faders = document.querySelectorAll('.fade-up');
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target); } });
+  }, { threshold: 0.1 });
+  faders.forEach(el => observer.observe(el));
+
+  document.querySelectorAll('.skill-bar').forEach(bar => {
+    const skillObserver = new IntersectionObserver(entries => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          setTimeout(() => { bar.style.width = bar.dataset.width + '%'; }, 200);
+          skillObserver.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.5 });
+    skillObserver.observe(bar);
+  });
+</script>
+</body>
+</html>
